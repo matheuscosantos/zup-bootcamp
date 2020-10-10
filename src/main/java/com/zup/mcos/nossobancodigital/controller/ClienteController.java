@@ -2,13 +2,14 @@ package com.zup.mcos.nossobancodigital.controller;
 
 import com.zup.mcos.nossobancodigital.dto.ClienteDTO;
 import com.zup.mcos.nossobancodigital.entity.Cliente;
+import com.zup.mcos.nossobancodigital.entity.ContaCorrente;
 import com.zup.mcos.nossobancodigital.entity.LogDeAprovacao;
 import com.zup.mcos.nossobancodigital.enumeration.Estado;
 import com.zup.mcos.nossobancodigital.form.ClienteForm;
 import com.zup.mcos.nossobancodigital.form.EnderecoForm;
 import com.zup.mcos.nossobancodigital.form.LogDeAprovacaoForm;
-import com.zup.mcos.nossobancodigital.repository.LogDeAprovacaoRepository;
 import com.zup.mcos.nossobancodigital.service.ClienteService;
+import com.zup.mcos.nossobancodigital.service.ContaCorrenteService;
 import com.zup.mcos.nossobancodigital.service.LogDeAprovacaoService;
 import com.zup.mcos.nossobancodigital.service.MensagemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,8 @@ public class ClienteController {
     MensagemService mensagemService;
 
     @Autowired
-    LogDeAprovacaoRepository logDeAprovacaoRepository;
+    ContaCorrenteService contaCorrenteService;
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscaClientePorId(@PathVariable(value = "id") Integer id){
@@ -64,10 +66,13 @@ public class ClienteController {
         return new ResponseEntity<>(new ClienteDTO(cliente), HttpStatus.OK);
     }
 
-    @PostMapping("/{id}/aprovacao")
+    @PostMapping("/{idCliente}/aprovacao")
     @Transactional
-    public Map<String, String> aprovaOuReprovaDadosCadastrados(@PathVariable Integer id, @RequestBody LogDeAprovacaoForm logDeAprovacaoForm){
-        LogDeAprovacao logDeAprovacaoSalvo = logDeAprovacaoService.alteraStatusDoClienteDeAcordoComAceitacao(id, logDeAprovacaoForm);
+    public Map<String, String> aprovaOuReprovaDadosCadastrados(@PathVariable Integer idCliente, @RequestBody LogDeAprovacaoForm logDeAprovacaoForm){
+        LogDeAprovacao logDeAprovacaoSalvo = logDeAprovacaoService.alteraStatusDoClienteDeAcordoComAceitacao(idCliente, logDeAprovacaoForm);
+        if(logDeAprovacaoSalvo.getEstado() == Estado.ACEITE){
+            ContaCorrente contaCorrenteCriada = contaCorrenteService.criaContaCorrenteParaCliente(idCliente, logDeAprovacaoSalvo.getId());
+        }
         return mensagemService.criaMensagemPorEstadoDeAceitacao(logDeAprovacaoSalvo);
     }
 }
