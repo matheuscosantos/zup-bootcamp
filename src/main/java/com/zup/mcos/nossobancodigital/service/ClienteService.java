@@ -47,9 +47,4 @@ public class ClienteService {
         return clienteRepository.findById(id);
     }
 
-//    public void alteraStatusDoClienteDeAcordoComAceitacao(Integer id, Estado estado) {
-//        Cliente cliente = clienteRepository.getOne(id);
-//        cliente.setEstado(estado);
-//        clienteRepository.save(cliente);
-//    }
 }
