@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TransferenciaInternaDTO {
-    private Integer id;
     private String contaDeOrigem;
     private String agenciaDeOrigem;
     private String contaDeDestino;
@@ -19,7 +18,6 @@ public class TransferenciaInternaDTO {
     private String dataEHoraDoPedido;
 
     public TransferenciaInternaDTO(TransferenciaInterna transferenciaInterna) {
-        this.id = transferenciaInterna.getId();
         this.agenciaDeOrigem = transferenciaInterna.getContaDeDestino().getAgencia();
         this.contaDeOrigem = transferenciaInterna.getContaDeDestino().getConta();
         this.agenciaDeDestino = transferenciaInterna.getContaDeOrigem().getAgencia();
