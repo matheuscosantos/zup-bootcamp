@@ -38,8 +38,4 @@ public class ContaCorrente {
         this.logDeAprovacao = logDeAprovacao;
     }
 
-
-
-
-
 }

@@ -1,7 +1,6 @@
 package com.zup.mcos.nossobancodigital.form;
 
 import com.zup.mcos.nossobancodigital.entity.Cliente;
-import com.zup.mcos.nossobancodigital.entity.Endereco;
 import lombok.*;
 
 import java.time.LocalDate;
