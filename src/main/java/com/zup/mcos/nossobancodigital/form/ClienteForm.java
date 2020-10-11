@@ -8,8 +8,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class ClienteForm {
     private String nome;
     private String sobrenome;

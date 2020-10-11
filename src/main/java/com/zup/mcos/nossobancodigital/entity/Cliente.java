@@ -34,18 +34,18 @@ public class Cliente{
     @ManyToOne
     private Endereco endereco;
 
-    public Cliente(String nome,
-                   String sobrenome,
-                   String email,
-                   String cnh,
-                   LocalDate dataDeNascimento,
-                   Endereco endereco) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.email = email;
-        this.cnh = cnh;
-        this.dataDeNascimento = dataDeNascimento;
-        this.endereco = endereco;
-    }
+//    public Cliente(String nome,
+//                   String sobrenome,
+//                   String email,
+//                   String cnh,
+//                   LocalDate dataDeNascimento,
+//                   Endereco endereco) {
+//        this.nome = nome;
+//        this.sobrenome = sobrenome;
+//        this.email = email;
+//        this.cnh = cnh;
+//        this.dataDeNascimento = dataDeNascimento;
+//        this.endereco = endereco;
+//    }
 
 }

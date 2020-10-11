@@ -14,7 +14,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @Getter
-@Setter
 public class Endereco{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,18 +24,4 @@ public class Endereco{
     private String complemento;
     private String cidade;
     private String estado;
-
-    public Endereco(String cep,
-                    String rua,
-                    String bairro,
-                    String complemento,
-                    String cidade,
-                    String estado) {
-        this.cep = cep;
-        this.rua = rua;
-        this.bairro = bairro;
-        this.complemento = complemento;
-        this.cidade = cidade;
-        this.estado = estado;
-    }
 }

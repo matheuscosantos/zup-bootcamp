@@ -15,8 +15,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class TransferenciaExternaForm {
     private String contaDeOrigem;
     private String agenciaDeOrigem;

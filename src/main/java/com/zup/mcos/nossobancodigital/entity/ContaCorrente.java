@@ -8,8 +8,6 @@ import java.util.Random;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Getter
 @Setter
 public class ContaCorrente {

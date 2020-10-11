@@ -6,9 +6,6 @@ import com.zup.mcos.nossobancodigital.enumeration.Estado;
 import lombok.*;
 
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class ClienteDTO {
     private Integer id;
     private String nome;

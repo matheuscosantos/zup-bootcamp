@@ -19,6 +19,8 @@ public class LogDeAprovacao {
 
     @ManyToOne
     private Cliente cliente;
+
+    @Enumerated(EnumType.STRING)
     private Estado estado;
     private LocalDateTime dataDeAlteracao;
 }

@@ -6,9 +6,6 @@ import lombok.*;
 import java.math.BigDecimal;
 
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class TransferenciaInternaDTO {
     private String contaDeOrigem;
     private String agenciaDeOrigem;

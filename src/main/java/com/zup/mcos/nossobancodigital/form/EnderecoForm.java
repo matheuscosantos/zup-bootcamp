@@ -4,10 +4,7 @@ import com.zup.mcos.nossobancodigital.entity.Endereco;
 import lombok.*;
 
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class EnderecoForm {
     private String cep;
     private String rua;

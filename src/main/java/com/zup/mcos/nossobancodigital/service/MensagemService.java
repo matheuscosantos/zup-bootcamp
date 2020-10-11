@@ -16,8 +16,8 @@ public class MensagemService {
             mensagem.put("mensagem", "Olá, em breve iremos criar sua conta e enviaremos por email. Obrigado :)");
             return mensagem;
         }else{
-            mensagem.put("mensagem", "");
+            mensagem.put("mensagem", "Olá, vamos verificar o motivo motivo pelos dados estarem incorretos e retornaremos o contato. Obrigado.");
+            return mensagem;
         }
-        return mensagem;
     }
 }
