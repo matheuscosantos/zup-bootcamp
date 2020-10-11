@@ -5,13 +5,10 @@ import com.zup.mcos.nossobancodigital.entity.Endereco;
 import com.zup.mcos.nossobancodigital.enumeration.Estado;
 import lombok.*;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class ClienteDTO {
     private Integer id;
     private String nome;
