@@ -17,18 +17,11 @@ public class TransferenciaInterna {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @ManyToOne
     private ContaCorrente contaDeOrigem;
-
     @ManyToOne
     private ContaCorrente contaDeDestino;
     private BigDecimal valor;
-//    private String codigoDoBancoDeDestino;
-//    private String nomeDoBancoDeDestino;
-//    private String agenciaDeDestino;
-//    private String nomeDaPessoaFavorecida;
-//    private String documentoDaPessoaFavorecida;
     private LocalDateTime dataEHoraDoPedido;
     private LocalDate diaDeEfetivacao;
 }
