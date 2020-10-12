@@ -21,7 +21,6 @@ public class EmailService {
             email.setSmtpPort(465);
             email.setAuthenticator(new DefaultAuthenticator("nossobancodigital@gmail.com", "password"));
             email.setSSLOnConnect(true);
-
             email.setFrom("boasvindas@nossobancodigital.com");
             email.setSubject("Criação de conta bancária");
             email.setMsg("Olá " + cliente.getNome() + ". Acabamos de confirmar a criação da sua conta bancária." +
@@ -29,6 +28,7 @@ public class EmailService {
                                                       "\nConta: " + contaCorrente.getConta() +
                                                       "\nAgência: "+ contaCorrente.getAgencia() +
                                                       "\nAgência: "+ contaCorrente.getCodigoDoBanco());
+
             email.addTo(cliente.getEmail());
             email.send();
         } catch (EmailException e) {
