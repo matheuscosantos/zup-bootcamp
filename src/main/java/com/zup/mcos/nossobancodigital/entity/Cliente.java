@@ -5,6 +5,10 @@ import com.zup.mcos.nossobancodigital.enumeration.Estado;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -22,9 +26,9 @@ public class Cliente{
     private Integer id;
     private String nome;
     private String sobrenome;
-
     @Column(unique = true)
     private String email;
+    @Column(unique = true)
     private String cnh;
     private LocalDate dataDeNascimento;
 
