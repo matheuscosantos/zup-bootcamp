@@ -2,7 +2,6 @@ package com.zup.mcos.nossobancodigital.controller;
 
 import com.zup.mcos.nossobancodigital.dto.TransferenciaExternaDTO;
 import com.zup.mcos.nossobancodigital.dto.TransferenciaInternaDTO;
-import com.zup.mcos.nossobancodigital.entity.TransferenciaExterna;
 import com.zup.mcos.nossobancodigital.entity.TransferenciaInterna;
 import com.zup.mcos.nossobancodigital.form.TransferenciaExternaForm;
 import com.zup.mcos.nossobancodigital.form.TransferenciaInternaForm;
