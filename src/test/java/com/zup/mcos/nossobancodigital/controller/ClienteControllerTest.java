@@ -66,6 +66,22 @@ public class ClienteControllerTest {
     }
 
     @Test
+    public void buscaClientePorIdQueNaoExiste() throws Exception{
+        URI uri = new URI("/api/v1/cliente/10");
+        mockMvc.perform(MockMvcRequestBuilders.get(uri))
+                .andExpect(MockMvcResultMatchers.status()
+                        .isNotFound());
+    }
+
+    @Test
+    public void buscaClientePorIdComFormatoErrado() throws Exception{
+        URI uri = new URI("/api/v1/cliente/10m");
+        mockMvc.perform(MockMvcRequestBuilders.get(uri))
+                .andExpect(MockMvcResultMatchers.status()
+                        .isBadRequest());
+    }
+
+    @Test
     public void aprovaDadosDoCadastroEAlteraOStatusParaAceite() throws  Exception{
         URI uri = new URI("/api/v1/cliente/3/aprovacao");
         String json = "    {\n" +
@@ -81,9 +97,9 @@ public class ClienteControllerTest {
     @Test
     public void aprovaDadosDoCadastroEAlteraOStatusParaNaoAceite() throws  Exception{
         URI uri = new URI("/api/v1/cliente/3/aprovacao");
-        String json = "    {\n" +
-                "        \"estado\":\"NAO_ACEITE\"\n" +
-                "    }";
+        String json = "{\n" +
+                      "     \"estado\":\"NAO_ACEITE\"\n" +
+                      "}";
         mockMvc.perform(MockMvcRequestBuilders.post(uri)
                 .content(json)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -132,14 +148,6 @@ public class ClienteControllerTest {
                 .andExpect(MockMvcResultMatchers
                         .status().isOk());
     }
-
-//    @Test
-//    public void buscaContaFavorita() throws Exception{
-//        URI uri = new URI("/api/v1/conta-corrente/transferencia-externa/favorito/Viviane");
-//        mockMvc.perform(MockMvcRequestBuilders.get(uri))
-//                .andExpect(MockMvcResultMatchers.status()
-//                        .isOk());
-//    }
 
 }
 
