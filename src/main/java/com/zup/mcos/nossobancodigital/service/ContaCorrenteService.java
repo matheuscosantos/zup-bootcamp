@@ -21,13 +21,15 @@ public class ContaCorrenteService {
     @Autowired
     LogDeAprovacaoRepository logDeAprovacaoRepository;
 
+    @Autowired
+    EmailService emailService;
+
     public ContaCorrente criaContaCorrenteParaCliente(Integer idCliente, Integer idLog) {
         Cliente cliente = clienteRepository.getOne(idCliente);
         LogDeAprovacao logDeAprovacao = logDeAprovacaoRepository.getOne(idLog);
         ContaCorrente contaCorrente = new ContaCorrente(cliente, logDeAprovacao);
         contaCorrenteRepository.save(contaCorrente);
+        emailService.enviar(cliente, contaCorrente);
         return contaCorrente;
     }
-
-
 }
