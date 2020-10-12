@@ -1,5 +1,7 @@
 package com.zup.mcos.nossobancodigital.service;
 
+import com.zup.mcos.nossobancodigital.dto.ClienteEmailDTO;
+import com.zup.mcos.nossobancodigital.dto.ContaEmailDTO;
 import com.zup.mcos.nossobancodigital.entity.Cliente;
 import com.zup.mcos.nossobancodigital.entity.ContaCorrente;
 import com.zup.mcos.nossobancodigital.entity.LogDeAprovacao;
@@ -29,7 +31,7 @@ public class ContaCorrenteService {
         LogDeAprovacao logDeAprovacao = logDeAprovacaoRepository.getOne(idLog);
         ContaCorrente contaCorrente = new ContaCorrente(cliente, logDeAprovacao);
         contaCorrenteRepository.save(contaCorrente);
-        emailService.enviar(cliente, contaCorrente);
+        emailService.enviar(new ClienteEmailDTO(cliente), new ContaEmailDTO(contaCorrente));
         return contaCorrente;
     }
 }
