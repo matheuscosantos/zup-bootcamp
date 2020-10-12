@@ -23,10 +23,10 @@ public class ClienteControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void deveCriarUmaConta() throws Exception {
+    public void deveCriarUmCliente() throws Exception {
         URI uri = new URI("/api/v1/cliente");
         String json = " {\n" +
-                    "       \"cnh\": \"3333333333\",\n" +
+                    "       \"cnh\": \"5555555555\",\n" +
                     "       \"dataDeNascimento\": \"2019-02-02\",\n" +
                     "       \"email\": \"oliveiramatheus666@gmail.com\",\n" +
                     "       \"nome\": \"Matheus\",\n" +
@@ -39,22 +39,40 @@ public class ClienteControllerTest {
                                             .status().isOk());
     }
 
-
     @Test
-    public void deveRetornarUmaConta() throws Exception{
+    public void deveAdicionarEnderecoAoCadastroDeClienteComCadastroBasico() throws Exception{
         URI uri = new URI("/api/v1/cliente/1/endereco");
         String json = "{\n" +
-                    "        \"cnh\": \"3333333333\",\n" +
-                    "        \"dataDeNascimento\": \"2019-02-02\",\n" +
-                    "        \"email\": \"oliveiramatheus666@gmail.com\",\n" +
-                    "        \"nome\": \"Matheus\",\n" +
-                    "        \"sobrenome\": \"Oliveira\"\n" +
-                    "  }";
+                      "    \"cep\":\"12630-000\",\n" +
+                      "    \"rua\":\"Travessa joao dias\",\n" +
+                      "    \"bairro\":\"Centro\",\n" +
+                      "    \"complemento\":\"Casa\",\n" +
+                      "    \"cidade\": \"São José dos Campos\",\n" +
+                      "    \"estado\": \"SP\"\n" +
+                      "}";
         mockMvc.perform(MockMvcRequestBuilders.put(uri)
                                 .content(json)
                                 .contentType(MediaType.APPLICATION_JSON))
                                     .andExpect(MockMvcResultMatchers
                                         .status().isOk());
+    }
+
+    @Test
+    public void naoDeveAdicionarEnderecoAoCadastroDeClienteQueNaoEstejaComEstadoComCadastroBasico() throws Exception{
+        URI uri = new URI("/api/v1/cliente/2/endereco");
+        String json = "{\n" +
+                "    \"cep\":\"12630-000\",\n" +
+                "    \"rua\":\"Travessa joao dias\",\n" +
+                "    \"bairro\":\"Centro\",\n" +
+                "    \"complemento\":\"Casa\",\n" +
+                "    \"cidade\": \"São José dos Campos\",\n" +
+                "    \"estado\": \"SP\"\n" +
+                "}";
+        mockMvc.perform(MockMvcRequestBuilders.put(uri)
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers
+                        .status().isBadRequest());
     }
 
     @Test

@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -16,19 +19,41 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class TransferenciaExternaForm {
+    @NotEmpty(message = "A conta de origem precisa ser preenchida")
+    @NotNull(message = "A conta de origem precisa ser preenchida")
     private String contaDeOrigem;
+    @NotEmpty(message = "A agencia de origem precisa ser preenchida")
+    @NotNull(message = "A agencia de origem precisa ser preenchida")
     private String agenciaDeOrigem;
+    @NotEmpty(message = "A conta de destino precisa ser preenchida")
+    @NotNull(message = "A conta de destino precisa ser preenchida")
     private String contaDeDestino;
+    @NotEmpty(message = "A agencia de destino precisa ser preenchida")
+    @NotNull(message = "A agencia de destino precisa ser preenchida")
     private String agenciaDeDestino;
+    @NotEmpty(message = "O nome do banco precisa ser preenchido")
+    @NotNull(message = "O nome do banco precisa ser preenchido")
     private String nomeDoBancoDeDestino;
+    @NotEmpty(message = "O codigo do banco de destino precisa ser preenchido")
+    @NotNull(message = "O codigo do banco de destino precisa ser preenchido")
     private String codigoDoBancoDeDestino;
+    @NotEmpty(message = "O nome do favorecido precisa ser preenchido")
+    @NotNull(message = "O nome do favorecido precisa ser preenchido")
     private String nomeDoFavorecido;
+    @NotEmpty(message = "O documento precisa ser preenchido")
+    @NotNull(message = "O documento precisa ser preenchido")
     private String documento;
+    @NotEmpty(message = "O campo 'favorito' precisa ser preenchido")
+    @NotNull(message = "O campo 'favorito' precisa ser preenchido")
     private Boolean favoritado;
+    @NotEmpty(message = "A descrição precisa ser preenchida")
+    @NotNull(message = "A descrição precisa ser preenchida")
     private String descricao;
+    @FutureOrPresent(message = "A data da transferencia precisa ser no futuro ou no presente")
     private LocalDate dataDaSolicitacao;
     @Enumerated(EnumType.STRING)
     private TipoDeConta tipoDeConta;
+    @NotNull
     private BigDecimal valor;
 
 

@@ -8,6 +8,7 @@ import com.zup.mcos.nossobancodigital.enumeration.Estado;
 import com.zup.mcos.nossobancodigital.form.ClienteForm;
 import com.zup.mcos.nossobancodigital.form.EnderecoForm;
 import com.zup.mcos.nossobancodigital.form.LogDeAprovacaoForm;
+import com.zup.mcos.nossobancodigital.repository.ClienteRepository;
 import com.zup.mcos.nossobancodigital.service.ClienteService;
 import com.zup.mcos.nossobancodigital.service.ContaCorrenteService;
 import com.zup.mcos.nossobancodigital.service.LogDeAprovacaoService;
@@ -17,7 +18,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -37,6 +41,9 @@ public class ClienteController {
     @Autowired
     ContaCorrenteService contaCorrenteService;
 
+    @Autowired
+    ClienteRepository clienteRepository;
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscaClientePorId(@PathVariable(value = "id") Integer id){
@@ -53,25 +60,36 @@ public class ClienteController {
 
     @PostMapping()
     @Transactional
-    public ResponseEntity<?> realizaCadastroBasico(@RequestBody ClienteForm cliente){
-        Cliente novoCliente = clienteService.salva(cliente);
-        return new ResponseEntity<>(new ClienteDTO(novoCliente), HttpStatus.OK);
+    public ResponseEntity<?> realizaCadastroBasico(@Valid @RequestBody ClienteForm cliente){
+        if(LocalDate.now().getYear() - cliente.getDataDeNascimento().getYear() < 18){
+            Cliente novoCliente = clienteService.salva(cliente);
+            return new ResponseEntity<>(new ClienteDTO(novoCliente), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
     @PutMapping("/{id}/endereco")
     @Transactional
-    public ResponseEntity<?> realizaCadastroEndereco(@PathVariable Integer id, @RequestBody EnderecoForm enderecoForm){
-        Cliente cliente = clienteService.buscaClienteEAdicionaEndereco(id, enderecoForm);
-        return new ResponseEntity<>(new ClienteDTO(cliente), HttpStatus.OK);
+    public ResponseEntity<?> realizaCadastroEndereco(@PathVariable Integer id, @Valid @RequestBody EnderecoForm enderecoForm){
+        if(clienteRepository.getOne(id).getEstado() == Estado.COM_DADOS_BASICOS){
+            Cliente cliente = clienteService.buscaClienteEAdicionaEndereco(id, enderecoForm);
+            return new ResponseEntity<>(new ClienteDTO(cliente), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/{idCliente}/aprovacao")
     @Transactional
-    public Map<String, String> aprovaOuReprovaDadosCadastrados(@PathVariable Integer idCliente, @RequestBody LogDeAprovacaoForm logDeAprovacaoForm){
-        LogDeAprovacao logDeAprovacaoSalvo = logDeAprovacaoService.alteraStatusDoClienteDeAcordoComAceitacao(idCliente, logDeAprovacaoForm);
-        if(logDeAprovacaoSalvo.getEstado() == Estado.ACEITE){
-            ContaCorrente contaCorrenteCriada = contaCorrenteService.criaContaCorrenteParaCliente(idCliente, logDeAprovacaoSalvo.getId());
+    public Map<String, String> aprovaOuReprovaDadosCadastrados(@PathVariable Integer idCliente, @Valid @RequestBody LogDeAprovacaoForm logDeAprovacaoForm){
+        if(clienteRepository.getOne(idCliente).getEstado() == Estado.COM_ENDERECO) {
+            LogDeAprovacao logDeAprovacaoSalvo = logDeAprovacaoService.alteraStatusDoClienteDeAcordoComAceitacao(idCliente, logDeAprovacaoForm);
+            if(logDeAprovacaoSalvo.getEstado() == Estado.ACEITE){
+                ContaCorrente contaCorrenteCriada = contaCorrenteService.criaContaCorrenteParaCliente(idCliente, logDeAprovacaoSalvo.getId());
+            }
+            return mensagemService.criaMensagemPorEstadoDeAceitacao(logDeAprovacaoSalvo);
         }
-        return mensagemService.criaMensagemPorEstadoDeAceitacao(logDeAprovacaoSalvo);
+        Map<String, String> mensagem = new HashMap<String, String>();
+        mensagem.put("mensagem", "Olá, agradecemos o contato, iremo verificar o motivo motivo pelos dados estarem incorretos e retornaremos o contato. Obrigado.");
+        return  mensagem;
     }
 }
