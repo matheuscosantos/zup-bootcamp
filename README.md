@@ -6,19 +6,19 @@ Criar uma API para solicitar e criar contas bancárias, executar transferências
 
 ### Fluxo de processos
 <p align="center">
-  <img  src="https://raw.githubusercontent.com/matheuscosantos/zup-bootcamp/adiciona_readme/imagens-readme/fluxo.png?token=AKCLEZVZDYXNF4RK3WEE42K7RTWYM">
+  <img  src="https://raw.githubusercontent.com/matheuscosantos/zup-bootcamp/main/imagens-readme/fluxo.png?token=AKCLEZSPI4GSU7KTGSPJ7HC7RXBVA">
 </p>
-
 
 
 ### Diagrama de classes
 <p align="center">
-  <img  src="https://raw.githubusercontent.com/matheuscosantos/zup-bootcamp/adiciona_readme/imagens-readme/diagrama-de-classes.png?token=AKCLEZQI3H2RGAIOOL4AFAC7RTNQI">
+  <img  src="https://raw.githubusercontent.com/matheuscosantos/zup-bootcamp/main/imagens-readme/diagrama-de-classes.png?token=AKCLEZTJC5TFI6SOAFZZXNC7RXBTO">
 </p>
+
 
 ### Relatório de cobertura
 <p align="center">
-  <img src="https://raw.githubusercontent.com/matheuscosantos/zup-bootcamp/adiciona_readme/imagens-readme/relatorio-de-cobertura.png?token=AKCLEZRF7TOG5ODPBPOXBEC7RTNTE">
+  <img src="https://raw.githubusercontent.com/matheuscosantos/zup-bootcamp/main/imagens-readme/relatorio-de-cobertura.png?token=AKCLEZT6CB5OWHI4ONJFZQS7RXBVQ">
 </p>
 
 ### Acesso a documentação da API
